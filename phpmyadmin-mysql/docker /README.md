@@ -28,11 +28,9 @@ root:root
 
 
 ## Backup file
+in floder data is backup file you can setup ftp server to edit
+you can copy data in floder data to xampp for backup user and database
 
-```bash
-  in floder data is backup file you can setup ftp server to edit
-  you can copy data in floder data to xampp for backup user and database
-```
 
 
 
