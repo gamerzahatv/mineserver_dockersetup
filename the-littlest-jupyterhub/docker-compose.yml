@@ -1,0 +1,19 @@
+version: '3'
+services:
+  build:
+    build:
+      context: .
+      dockerfile: integration-tests/Dockerfile
+    image: tljh-systemd-builder  # Choose a name for the temporary builder image
+  tljh-dev:
+    build:
+      context: .
+      dockerfile: integration-tests/Dockerfile
+    privileged: true
+    container_name: tljh-dev
+    ports:
+      - "12000:80"
+    volumes:
+      - ./:/srv/src
+      - ./jupyterbackup:/home  # Additional volume binding
+
