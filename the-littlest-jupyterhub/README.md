@@ -37,10 +37,8 @@ python3 /srv/src/bootstrap/bootstrap.py --admin admin:password
 
 
 ## Backup file
+in floder home is backup file you can setup ftp server to edit code
 
-```bash
-  in floder home is backup file you can setup ftp server to edit code
-```
 
 
 
