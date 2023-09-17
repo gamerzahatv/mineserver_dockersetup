@@ -7,7 +7,7 @@ services:
     container_name: mysql-container
     tty: true
     environment:
-      MYSQL_ROOT_PASSWORD: meownani
+      MYSQL_ROOT_PASSWORD: root
       SERVICE_NAME: mysql
     mem_limit: 1g # Limit MySQL container to 1GB of memory
     ports:
