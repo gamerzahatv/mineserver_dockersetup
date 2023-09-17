@@ -1,10 +1,5 @@
 version: '3'
 services:
-  build:
-    build:
-      context: .
-      dockerfile: integration-tests/Dockerfile
-    image: tljh-systemd-builder  # Choose a name for the temporary builder image
   tljh-dev:
     build:
       context: .
