@@ -1,0 +1,33 @@
+version: '3.8'
+networks:
+  minenetwork:
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: meownani
+      SERVICE_NAME: mysql
+    mem_limit: 1g # Limit MySQL container to 1GB of memory
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+    networks:
+      - minenetwork
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin-container
+    ports:
+      - "4321:80"
+    depends_on:
+      - mysql
+    mem_limit: 500m # Limit phpMyAdmin container to 500MB of memory
+    environment:
+      PMA_HOST: mysql
+    networks:
+      - minenetwork
+
+
