@@ -10,7 +10,7 @@ usermysqlpassword='YOUR PASSWORD MYSQL'
 portainerport='Your Portainerport'
 jupyterhubport='Your jupyterhubport'
 flaskserverport='your flaskserverport'
-filestash='yourfilestashport'
+filestash='your filestashport'
 ```
 
 ## To  deploy Flask miniserver
