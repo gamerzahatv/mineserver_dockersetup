@@ -1,0 +1,6 @@
+/* Add this CSS to your stylesheet or in a <style> block in the HTML */
+.code-container {
+    max-width: 100%;
+    overflow: hidden;
+    text-align:left;
+}

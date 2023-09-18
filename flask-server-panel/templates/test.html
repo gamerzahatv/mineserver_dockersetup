@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css">
+    <title>Sample Form</title>
+
+</head>
+
+<body>
+    <!-- <h1>Contact Us</h1> -->
+    
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="row">
+            <div>
+                <h1 class="mb-4">Server Database check</h1>
+                <h2>chandracodecraft.ddns.net</h2>
+                <div class="mb-3">
+                    <label class="form-label">Host</label>
+                    <input type="text" class="form-control" id="host" placeholder="Enter your name" required>
+                </div>
+                <!-- <div class="mb-3">
+                        <label  class="form-label">Database</label>
+                        <input type="text" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"
+                            placeholder="Enter database">
+                    </div> -->
+                <div class="mb-3">
+                    <label class="form-label">User</label>
+                    <input type="text" class="form-control" id="User" required placeholder="Enter your user">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" id="Password" required
+                        placeholder="Enter your password">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Port</label>
+                    <input type="text" class="form-control" id="Port" required placeholder="Enter your port">
+                </div>
+                <div class="mb-3 d-flex align-items-center justify-content-center">
+                <!-- <button type="submit" >Submit</button> -->
+                    <button onclick="handleClick()">Check server</button> 
+                </div>
+                
+            </div>
+            <div class="mb-3 d-flex align-items-center justify-content-center">
+                <label id="mystatus"></label>
+            </div>
+            
+
+        </div>
+    </div>
+
+   
+    <!-- <button onclick="showAlert()">Show Alert</button> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.all.min.js"></script>
+</body>
+
+</html>
+
+
+<script>
+    // Function to handle the button click event
+    function handleClick() {
+        // Add a click event listener to the submit button
+
+        const host = document.getElementById("host").value;
+        const user = document.getElementById("User").value;
+        const pass = document.getElementById("Password").value;
+        const port = document.getElementById("Port").value;
+        // Check if any of the fields are empty
+        if (host === "" || user === "" || pass === "" || port === "") {
+            alert("Please fill in all fields");
+        } else {
+            // All fields are filled, proceed with your action here
+            console.log("Host:", host);
+            console.log("User:", user);
+            console.log("Password:", pass);
+            console.log("Port:", port);
+            const formData = {
+                host: host,
+                user: user,
+                password: pass,
+                port: port
+            };
+
+            // Send the form data to your Flask server as JSON
+            fetch("http://chandracodecraft.ddns.net:2323/serverstatus", {
+            //fetch("http://chandracodecraft.ddns.net:2323/serverstatus", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status == 'OK') {
+                        Swal.fire({
+                        icon: 'success',
+                        title:  data.desc,
+                        showConfirmButton: false,
+                        timer: 2500
+                        })
+                        document.getElementById("mystatus").textContent =  data.desc;
+                    }else{
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: data.desc,
+                        })
+                    }
+
+                })
+                .catch(error => {
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    })
+                    console.log(error)
+                });
+        }
+    }
+</script>

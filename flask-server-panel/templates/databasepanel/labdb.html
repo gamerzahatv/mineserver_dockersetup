@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+    {% include 'navbar.html' %}
+    <main>
+        <br>
+        <a href="http://{{maindns}}:{{flaskserverport}}/dbdashboard" >
+            <button type="button" class="btn btn-danger">ย้อนกลับ</button>
+        </a>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <h1 class="fw-light">ติดตั้งโมดูล</h1>
+                    <!-- Centered iframe using the "center-iframe" class -->
+                    <div>
+                        <pre><code class="language-python">pip install mysql.connector</code></pre>
+                    </div>
+                    <br>
+                    <h5 class="fw-light">ติดตั้งโมดูลก่อนจะเชื่อมต่อกับฐานข้อมูล</h5>
+                </div>
+            </div>
+        </section>
+    </main>
+    <main>
+        <div>
+            <section class="text-center container">
+
+                <h1 class="fw-light">ทดสอบการเชื่อมต่อกับฐานข้อมูล</h1>
+            </section>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <pre><code class="python code-container">
+    import mysql.connector
+        try:
+            mydb = mysql.connector.connect(
+            host="{{maindns}}",
+            user="{{testuserdb}}",
+            password="{{testuserdbpass}}",
+            port="{{mysqlport}}",
+            )
+            mydb.close()
+            print('database connetstatus : ', mydb.is_connected())
+        except:
+            print("ERROR")
+                </code></pre>
+            </div>
+            <div class="container bg-light">
+                <div class="col-md-12 text-center">
+                    <button id ="connetplayground" type="button" class="btn btn-success">RUN</button>
+                    
+                </div>
+                
+            </div>
+            <br>
+            <div class="container ">
+                <div class="col-md-12 text-center">
+                   <p id="status_onconnet"></p>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <main>
+        <div>
+            <section class="text-center container">
+
+                <h1 class="fw-light">ทดสอบแสดงผลดาต้าเบสในบัญชีทดลอง</h1>
+            </section>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <pre><code class="python code-container">
+    import mysql.connector
+    try:
+        getlistdb = []
+        mydb = mysql.connector.connect(
+            host="chandracodecraft.ddns.net",
+            user="guest",
+            password="guest",
+            port="3306",
+        )
+        mycursor = mydb.cursor()
+
+        mycursor.execute("SHOW DATABASES")
+
+        for x in mycursor:
+          getlistdb.append(x)
+        
+        mydb.close()
+        return getlistdb
+    except ValueError as ve:
+        # Handle the case where 'port' is not a valid integer
+        print(f"Invalid port value: {ve}")
+        return False
+    except mysql.connector.Error as e:
+        # Handle any other connection errors
+        print("MySQL server is not running")
+        print(f"Error: {e}")
+        return False
+                </code></pre>
+            </div>
+            <div class="container bg-light">
+                <div class="col-md-12 text-center">
+                    <button id ="showdbplayground" type="button" class="btn btn-success">RUN</button>
+                    
+                </div>
+                
+            </div>
+            <br>
+            <div class="container ">
+                <div class="col-md-12 text-center">
+                   <p id="list_db"></p>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <main>
+        <br>
+        <div>
+            <section class="text-center container">
+
+                <h1 class="fw-light">API</h1>
+                <h5 class="fw-light">API สำหรับดูสถานะของฐานข้อมูล</h5>
+            </section>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <pre><code class="python code-container">
+        GET http://{{maindns}}:{{flaskserverport}}/checkstatusdb  
+                </code></pre>
+            </div>
+            <br>
+            <div class="text-center ">
+                <h5 class="fw-light">เช็คสถานะ mysql server</h5>
+                <br>
+            </div>
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <pre><code class="python code-container">
+        GET http://{{maindns}}:{{flaskserverport}}/Dnscheck
+                </code></pre>
+            </div>
+            <br>
+            <div class="text-center ">
+                <h5 class="fw-light">เช็คสถานะ DNS SERVER</h5>
+                <br>
+            </div>
+            <div class="container bg-light">
+                <div class="col-md-12 text-center">
+                    <a href="https://reqbin.com/"target="_blank">
+                        <button id ="connetplayground" type="button" class="btn btn-success">ทอลองapi</button>
+                    </a>
+                    
+                </div>
+                
+                
+            </div>
+            <br>
+            <br>            
+        </div>
+    </main>
+    <!-- {% include 'footer.html' %} -->
+</body>
+
+<script>
+    // Define the click event handler
+    function connetplayground() {
+        const mydbstatus = document.getElementById('status_onconnet');
+        const apiUrl = 'http://{{maindns}}:{{flaskserverport}}/dbconnetplayground';
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+              // Handle the API response data
+              //console.log(data.status); // Log the data to the console
+              // You can add code here to do something with the API data
+              if(data.serverstatus=='True'){
+                //mydbElement.textContent = 'DB Connect';
+                mydbstatus.innerHTML = 'DB Connect';
+                Swal.fire({
+                icon: 'success',
+                title: 'DB CONNECT success',
+                showConfirmButton: false,
+                timer: 1500
+                })
+              }else if(data.serverstatus=='False') {
+                //mydbElement.textContent = 'DB ConnectError';
+                mydbstatus.innerHTML = 'DB ConnectError';
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'DBconnect failed',
+                })
+              }
+  
+            })
+            .catch(error => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong! DNS SERVER ERROR',
+              })
+            });
+    }
+
+    function showdbplayground() {
+        console.log('listdb')
+        const mydbstatus = document.getElementById('list_db');
+        const apiUrl = 'http://{{maindns}}:{{flaskserverport}}/showdbplayground';
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+              // Handle the API response data
+              //console.log(data.status); // Log the data to the console
+              // You can add code here to do something with the API data
+              if(data.serverstatus=='False'){
+                //mydbElement.textContent = 'DB Connect';
+                mydbstatus.innerHTML = data.serverstatus;
+                Swal.fire({
+                icon: 'success',
+                title: 'DB CONNECT success',
+                showConfirmButton: false,
+                timer: 1500
+                })
+              }else {
+                //mydbElement.textContent = 'DB ConnectError';
+                mydbstatus.innerHTML = `DB LIST :  |${data.serverstatus}|`;
+                Swal.fire({
+                icon: 'success',
+                title: 'LIST DB success',
+                showConfirmButton: false,
+                timer: 1500
+                })
+              }
+  
+            })
+            .catch(error => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong! DNS SERVER ERROR',
+              })
+            });
+    }
+  
+    document.getElementById('connetplayground').addEventListener('click', connetplayground);
+    document.getElementById('showdbplayground').addEventListener('click', showdbplayground);
+  </script>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+  {% include 'navbar.html' %}
+  <main>
+
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">มินิเซิฟเวอร์มอนิเตอร์</h1>
+          <p class="lead text-muted">DOCKER | FLASK | JUPYTER | Potainer | Filestash | Database</p>
+          <p>
+            <button id = "myButton" type="button" class="btn btn-primary my-2 ">เช็คDns</button>
+            <a href="https://github.com/gamerzahatv/mineserver_dockersetup" target="_blank"
+              class="btn btn-secondary my-2">Source Code</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <image href="/static/css/icon/potainer.png" width="100%"/>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">Potainer เป็นเครื่องมือสำหรับจัดการและควบคุมระบบ Docker
+                  ที่ใช้งานได้ง่ายและมีอินเตอร์เฟซกราฟิกผู้ใช้ (GUI)</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://{{maindns}}:{{portainerport}}/" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">จัดการ</button>
+                    </a>
+                    <a href="https://www.portainer.io/portainer-tutorials" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">เพิ่มเติม</button>
+                    </a>
+                    
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <image href="/static/css/icon/sql.png" width="100%"/>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">Database Panel ใช้สำหรับแอดมินจัดการระบบฐานข้อมูล</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="http://{{maindns}}:{{flaskserverport}}/dbdashboard">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">จัดการ</button>
+                    </a>
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <image href="https://raw.githubusercontent.com/mickael-kerjean/filestash_images/master/.assets/photo.jpg" width="100%"/>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">Filestash
+                  เป็นแพลตฟอร์มที่ออกแบบมาเพื่อการจัดการและแชร์ไฟล์ออนไลน์อย่างรวดเร็วผ่านทางเว็บเบราว์เซอร์</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a  href="http://{{maindns}}:{{filestash}}/" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">จัดการ</button>
+                    </a>
+                    <button id = "guesfilestash" type="button" class="btn btn-sm btn-outline-secondary">ทดลองใช้</button>
+                    <a href="https://www.filestash.app/" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">เพิ่มเติม</button>
+                    </a>
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <image href="/static/css/icon/jupyter.png" width="100%"/>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">JupyterHub เป็นแพลตฟอร์มสำหรับการจัดการและให้บริการ Jupyter Notebook
+                  แบบหลายผู้ใช้พร้อมกันผ่านทางเว็บบราวเซอร์</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="http://{{maindns}}:{{jupyterhubport}}/" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">จัดการ</button>
+                    </a>
+                    <button id = "guestjupyterlab" type="button" class="btn btn-sm btn-outline-secondary">ทดลองใช้</button>
+                    <a href="https://github.com/jupyterhub/the-littlest-jupyterhub" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">คู่มือ</button>
+                    </a>
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- {% include 'footer.html' %} -->
+
+
+</body>
+
+<script>
+  // Define the click event handler
+  function handleClick() {
+      const apiUrl = 'http://{{maindns}}:{{flaskserverport}}/Dnscheck';
+      fetch(apiUrl)
+          .then(response => response.json())
+          .then(data => {
+            // Handle the API response data
+            //console.log(data.status); // Log the data to the console
+            // You can add code here to do something with the API data
+            if(data.status=='True'){
+              Swal.fire({
+              icon: 'success',
+              title: 'DNS SERVER OK',
+              showConfirmButton: false,
+              timer: 1500
+              })
+            }else if(data.status=='False') {
+              Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong! DNS SERVER ERROR',
+              })
+            }
+
+          })
+          .catch(error => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong! DNS SERVER ERROR',
+            })
+          });
+  }
+  function guesthub() {
+    Swal.fire({
+    title: 'บัญชีสำหรับทดลองใช้',
+    html: 'บัญชีผู้ใช้ : guest <br> รหัส : guest' ,
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+    })
+  }
+  function admincontract() {
+    Swal.fire({
+    title: 'บัญชีสำหรับทดลองใช้',
+    html: 'ติดต่อแอดมิน' ,
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+    })
+  }
+
+  document.getElementById('myButton').addEventListener('click', handleClick);
+  document.getElementById('guestjupyterlab').addEventListener('click', admincontract);
+  document.getElementById('guesfilestash').addEventListener('click', guesthub);
+  
+</script>
+
+</html>

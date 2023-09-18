@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body>
+  {% include 'navbar.html' %}
+  <main>
+    <br>
+    <a href="http://{{maindns}}:{{flaskserverport}}/">
+      <button type="button" class="btn btn-danger">ย้อนกลับ</button>
+    <a>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">จัดการฐานข้อมูล</h1>
+          <p class="lead text-muted">DOCKER | PhpMyAdmin | MySQL</p>
+          <p>
+            <a id="checkphpmyadmin" class="btn btn-primary my-2">เช็คphpmyadminserver</a>
+            <a id="checkmysql" class="btn btn-secondary my-2">เช็คmysqlserver</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <image href="/static/css/icon/phpmyadmin.png" width="100%"/>
+                <!-- /static/ayrton_senna_movie_wallpaper_by_bashgfx-d4cm6x6.jpg -->
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">phpMyAdmin เป็นเครื่องมือแบบเว็บเพื่อจัดการฐานข้อมูล MySQL หรือ MariaDB
+                  ที่ใช้งานง่ายและมีอินเตอร์เฟซกราฟิกผู้ใช้ (GUI) ที่ช่วยให้ผู้ดูแลระบบและผู้ใช้สามารถจัดการกับฐานข้อมูล
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="http://{{maindns}}:{{phpmyadminport}}/" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">จัดการ</button>
+                    </a>
+                    <a href="https://docs.phpmyadmin.net/en/latest/user.html" target="_blank">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">เพิ่มเติม</button>
+                    </a>
+                    <button  id= "infophpmyadmin"type="button" class="btn btn-sm btn-outline-secondary">ทดลองใช้</button>
+                  </div>
+                  <small class="text-muted"></small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <image href="/static/css/icon/MySQL-Logo.wine.svg" width="100%"/>
+              </svg>
+
+              <div class="card-body">
+                <p class="card-text">คู่มือการใช้งานและทดสอบต่อ API กับดาต้าเบสของเรา</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="http://{{maindns}}:{{flaskserverport}}/dblap">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">ลองดู</button>
+                    </a>
+                  </div>
+                  <small class="text-muted">9 mins</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <!-- {% include 'footer.html' %} -->
+</body>
+
+<script>
+  // Define the click event handler
+  function phpmyadmincheck() {
+    //console.log('php')
+    const jsonData = {
+      dns: '{{maindns}}',
+      port: '{{phpmyadminport}}',
+    };
+
+    fetch('/checkserverdb', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(jsonData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        //console.log(data)
+        if (data.DBstatus == 'True') {
+          Swal.fire({
+            icon: 'success',
+            title: 'PHPMYADMIN SERVER OK',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        } else if (data.DBstatus== 'False') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!  SERVER ERROR',
+          })
+        }
+
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!  SERVER ERROR',
+        })
+        console.log(error)
+      });
+  }
+
+  function  mysqlcheck() {
+    //console.log('mysql')
+    const jsonData = {
+      dns: '{{maindns}}',
+      port: '{{mysqlport}}',
+    };
+
+    fetch('/checkserverdb', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(jsonData)
+    })
+      .then(response => response.json())
+      .then(data => {
+
+        if (data.DBstatus === 'True') {
+          Swal.fire({
+            icon: 'success',
+            title: 'MYSQL SERVER OK',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        } else if (data.DBstatus === 'False') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong! DNS SERVER ERROR',
+          })
+        }
+
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong! DNS SERVER ERROR',
+        })
+        console.log(error)
+      });
+  }
+
+  function infofphpmyadmin() {
+    Swal.fire({
+    title: 'บัญชีสำหรับทดลองใช้',
+    html: 'บัญชีผู้ใช้ : guest <br> รหัส : guest' ,
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+  })
+  }
+document.getElementById('checkphpmyadmin').addEventListener('click',  phpmyadmincheck);
+document.getElementById('checkmysql').addEventListener('click', mysqlcheck);
+document.getElementById('infophpmyadmin').addEventListener('click',  infofphpmyadmin);
+
+</script>
+
+</html>
