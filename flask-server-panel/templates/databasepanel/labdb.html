@@ -86,16 +86,14 @@
           getlistdb.append(x)
         
         mydb.close()
-        return getlistdb
+        print(getlistdb)
     except ValueError as ve:
         # Handle the case where 'port' is not a valid integer
         print(f"Invalid port value: {ve}")
-        return False
     except mysql.connector.Error as e:
         # Handle any other connection errors
         print("MySQL server is not running")
         print(f"Error: {e}")
-        return False
                 </code></pre>
             </div>
             <div class="container bg-light">
