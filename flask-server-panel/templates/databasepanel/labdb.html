@@ -39,8 +39,8 @@
             password="{{testuserdbpass}}",
             port="{{mysqlport}}",
             )
-            mydb.close()
             print('database connetstatus : ', mydb.is_connected())
+            mydb.close()
         except:
             print("ERROR")
                 </code></pre>
