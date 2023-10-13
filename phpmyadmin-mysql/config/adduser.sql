@@ -172,130 +172,26 @@ GRANT ALL PRIVILEGES
 ON
     `teamten\_%`.* TO 'teamten'@'%';
 
-
-
-#################################  วันจริง ##################################
-
-#aiyakchapenspiderman
-CREATE USER 'aiyakchapenspiderman'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '8c7a';
+#test
+CREATE USER 'test'@'%' 
+    IDENTIFIED WITH mysql_native_password BY 'test';
 GRANT USAGE
 ON
-    *.* TO 'aiyakchapenspiderman'@'%';
+    *.* TO 'test'@'%';
 ALTER
-    USER 'aiyakchapenspiderman'@'%' REQUIRE NONE
+    USER 'test'@'%' REQUIRE NONE
 WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `aiyakchapenspiderman`; GRANT ALL PRIVILEGES
+    3000 MAX_CONNECTIONS_PER_HOUR 3000 MAX_UPDATES_PER_HOUR 3000 MAX_USER_CONNECTIONS 0;
+CREATE DATABASE IF NOT EXISTS `test`; GRANT ALL PRIVILEGES
 ON
-    `aiyakchapenspiderman`.* TO 'aiyakchapenspiderman'@'%';
+    `test`.* TO 'test'@'%';
 GRANT ALL PRIVILEGES
 ON
-    `aiyakchapenspiderman\_%`.* TO 'aiyakchapenspiderman'@'%';
+    `test\_%`.* TO 'test'@'%';
 
 
-#paphonchaisangma
-CREATE USER 'paphonchaisangma'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '5sd2';
-GRANT USAGE
-ON
-    *.* TO 'paphonchaisangma'@'%';
-ALTER
-    USER 'paphonchaisangma'@'%' REQUIRE NONE
-WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `paphonchaisangma`; GRANT ALL PRIVILEGES
-ON
-    `paphonchaisangma`.* TO 'paphonchaisangma'@'%';
-GRANT ALL PRIVILEGES
-ON
-    `paphonchaisangma\_%`.* TO 'paphonchaisangma'@'%';
-
-#imissher
-CREATE USER 'imissher'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '1s4w';
-GRANT USAGE
-ON
-    *.* TO 'imissher'@'%';
-ALTER
-    USER 'imissher'@'%' REQUIRE NONE
-WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `imissher`; GRANT ALL PRIVILEGES
-ON
-    `imissher`.* TO 'imissher'@'%';
-GRANT ALL PRIVILEGES
-ON
-    `imissher\_%`.* TO 'imissher'@'%';
-
-#pathfinder
-CREATE USER 'pathfinder'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '3h7b';
-GRANT USAGE
-ON
-    *.* TO 'pathfinder'@'%';
-ALTER
-    USER 'pathfinder'@'%' REQUIRE NONE
-WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `pathfinder`; GRANT ALL PRIVILEGES
-ON
-    `pathfinder`.* TO 'pathfinder'@'%';
-GRANT ALL PRIVILEGES
-ON
-    `pathfinder\_%`.* TO 'pathfinder'@'%';
-
-#sunnyday
-CREATE USER 'sunnyday'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '9k2n';
-GRANT USAGE
-ON
-    *.* TO 'sunnyday'@'%';
-ALTER
-    USER 'sunnyday'@'%' REQUIRE NONE
-WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `sunnyday`; GRANT ALL PRIVILEGES
-ON
-    `sunnyday`.* TO 'sunnyday'@'%';
-GRANT ALL PRIVILEGES
-ON
-    `sunnyday\_%`.* TO 'sunnyday'@'%';
 
 
-#thesimp
-CREATE USER 'thesimp'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '24gv';
-GRANT USAGE
-ON
-    *.* TO 'thesimp'@'%';
-ALTER
-    USER 'thesimp'@'%' REQUIRE NONE
-WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `thesimp`; GRANT ALL PRIVILEGES
-ON
-    `thesimp`.* TO 'thesimp'@'%';
-GRANT ALL PRIVILEGES
-ON
-    `thesimp\_%`.* TO 'thesimp'@'%';
-
-#tridevel
-CREATE USER 'tridevel'@'%' 
-    IDENTIFIED WITH mysql_native_password BY '78iy';
-GRANT USAGE
-ON
-    *.* TO 'tridevel'@'%';
-ALTER
-    USER 'tridevel'@'%' REQUIRE NONE
-WITH MAX_QUERIES_PER_HOUR
-    800 MAX_CONNECTIONS_PER_HOUR 800 MAX_UPDATES_PER_HOUR 800 MAX_USER_CONNECTIONS 3;
-CREATE DATABASE IF NOT EXISTS `tridevel`; GRANT ALL PRIVILEGES
-ON
-    `tridevel`.* TO 'tridevel'@'%';
-GRANT ALL PRIVILEGES
-ON
-    `tridevel\_%`.* TO 'tridevel'@'%';
 
 
 
