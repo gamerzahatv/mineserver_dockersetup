@@ -1,0 +1,41 @@
+version: "3.9"
+
+networks:
+  chandradb:
+
+services:
+  mysql:
+    image: mysql:8.1.0
+    container_name: mysql-chandra
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      SERVICE_NAME: mysql
+    #mem_limit: 1g # Limit MySQL container to 1GB of memory
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/db:/var/lib/mysql
+      - ./config/adduser.sql:/docker-entrypoint-initdb.d/adduser.sql
+    networks:
+      - chandradb
+    # healthcheck:
+    #   test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+    #   timeout: 20s
+    #   retries: 10
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    container_name: phpmyadmin-chandra
+    ports:
+      - "4321:80"
+    
+    depends_on:
+      - mysql
+    volumes:
+      - ./config/config.inc.php:/etc/phpmyadmin/config.inc.php
+    #mem_limit: 500m # Limit phpMyAdmin container to 500MB of memory
+    environment:
+      PMA_HOST: mysql
+    networks:
+      - chandradb
